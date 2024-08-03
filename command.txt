@@ -1,0 +1,88 @@
+# 豚の10ブロック上空に矢（arrow）を召喚
+
+/execute as @e[type=pig] at @s run summon arrow ~ ~10 ~
+
+
+# ゾンビが砂ブロックの上にいるときに、落雷
+リピートの常時
+
+/execute as @e[type=zombie] at @s if block ~ ~-1 ~ sand run summon lightning_bolt
+
+/execute at @e[type=]
+
+
+# as が省略されている。実行者はコマンドブロックとなる
+/execute at @e[type=thrown_trident] run summon lightning_bolt ~ ~-1 ~
+
+
+[【初心者向け】新executeコマンドでオーラエフェクトが出るダイヤモンドの剣を作った！統合版マイクラ/教育版マイクラ対応 -](https://kidsprogram.co.jp/minecraft/particle_execute)
+/execute as @p[hasitem={item=diamond_sword, location=slot.weapon.mainhand}] at @s run particle sonic_explosion ~ ~1 ~
+
+
+
+
+
+
+# A
+/scoreboard objectives add hado dummy
+
+# B
+/execute as @e[c=2] as @e[c=2] as @e[c=2] as @e[c=2] at @e[type=item, name= ダイヤモンドの剣] at @p[r=3] run summon armor_stand zanpa ~ ~10000 ~
+
+# C
+/execute at @a at @e[type=item, name= ダイヤモンドの剣,r=3] run replaceitem entity @p slot.weapon.mainhand 0 diamond_sword 1
+
+# D
+/kill @e[type=item, name= ダイヤモンドの剣]
+
+# E
+/scoreboard players add @e[type=armor_stand, name=zanpa] hado 1
+
+# F
+/execute as @e[type=armor_stand, name=zanpa, scores={hado=1}, c=16] at @e[type=armor_stand, name=zanpa, scores={hado=1}, rym=0, ry=0, c=16] at @s run tp  ~ ~ ~ ~22.44444444
+
+# G
+/execute as @e[type=armor_stand, name=zanpa, scores={hado=1}] at @s run tp ^^^-1.7
+
+# H
+/execute as @e[c=2] as @e[c=2] as @e[type=armor_stand, name=zanpa] at @s run tp @s ^^^0.3
+
+# I
+/execute at @e[type=armor_stand, name=zanpa, scores={hado=..20}] run particle minecraft:sonic_explosion ^^-10000^4.8
+
+# J
+/execute as @e[type=armor_stand, name=zanpa, scores={hado=4..}] at @s positioned ~~-10000~ run damage @e[r=2] 10 self_distruct entity @s
+
+# K
+/kill @e[type=armor_stand, name=zanpa, scores={hado=23..}]
+
+
+/execute at @e[type=armor_stand, name=zanpa, scores={hado=..20}] run particle sonic_explosion ^^-10000^4.8
+
+
+# ボスてきなやつ
+impact
+/particle minecraft:trial_spawner_detection ^^^20
+
+chain
+/summon lightning_bolt ^1^^20
+
+chain
+/summon zombie ^3^^20
+
+chain
+/execute as @e[type=zombie] run effect @s health_boost 999999 119 true
+
+chain
+/execute as @e[type=zombie] run effect @s instant_damage 2 255 true
+
+chain
+/execute as @e[type=zombie] run replaceitem entity @s slot.armor.head 0 netherite_helmet
+
+chain
+/execute as @e[type=zombie] run effect @s speed 9999999 7 true
+
+# scoreboard のやつ？
+repeat
+/execute as @e[type=zombie] run scoreboard players add @s tick 1
+
